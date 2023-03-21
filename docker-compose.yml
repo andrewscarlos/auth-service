@@ -1,0 +1,38 @@
+version: "3.3"
+
+services:
+  # mongo_database:
+  #   image: mongo:3.2.3
+  #   container_name: mongo_database
+  #   restart: always
+  #   ports:
+  #     - 27018:27018
+  postgres-db:
+    image: postgres
+    container_name: postgres-db
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=nest
+      - POSTGRES_PASSWORD=nest
+      - POSTGRES_DB=nest
+    volumes:
+      - pgdata:/data/postgres
+  # app:
+  #   build: .
+  #   container_name: auth-service
+  #   ports:
+  #     - 3000:3000
+  #   volumes: 
+  #     - .:/usr/app
+  #   links: 
+  #     - postgres-db
+  #    ## - mongo_database
+  #   depends_on:
+  #     - postgres-db
+  #    ##  - mongo_database
+
+volumes:
+  pgdata:
+    driver: local
